@@ -218,9 +218,48 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--navy);min
 .btn-cancel{background:var(--bg);color:var(--navy);border:1px solid var(--border);border-radius:8px;padding:8px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;}
 .btn-ok{background:var(--accent);color:white;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;}
 .btn-ok:hover{background:#1a6ee8;}
-</style>
+
+@media(max-width:768px){
+  .sb{width:100%;min-width:unset;height:auto;min-height:unset;position:fixed;top:auto;bottom:0;left:0;right:0;z-index:20;flex-direction:row;border-top:1px solid rgba(255,255,255,0.1);}
+  .sb-logo{display:none;}
+  .sb-sync{display:none;}
+  .sb-nav{flex-direction:row;padding:6px 8px;gap:4px;border-bottom:none;flex:1;justify-content:space-around;}
+  .sb-nav-label{display:none;}
+  .nav-item{flex-direction:column;gap:2px;padding:6px 8px;font-size:10px;flex:1;justify-content:center;align-items:center;border-radius:10px;}
+  .nav-item .nav-ico{font-size:20px;}
+  .nav-item .nav-badge{position:absolute;top:4px;right:4px;}
+  .sb-clients{display:none;}
+  .sb-add{display:none;}
+  .main{margin-left:0;padding:16px 14px 80px;}
+  .grid{grid-template-columns:1fr;}
+  .cl-grid{grid-template-columns:1fr;}
+  .detail-layout{grid-template-columns:1fr;}
+  .tpl-grid{grid-template-columns:1fr;}
+  .dash-grid{grid-template-columns:1fr 1fr;}
+  .pt-header{display:none;}
+  .pt-row{grid-template-columns:1fr;border-radius:10px;margin-bottom:8px;border:1px solid var(--border);}
+  .pt-cell{padding:8px 14px;}
+  .pt-cell:not(:first-child){padding-top:0;}
+  .toolbar{flex-wrap:wrap;}
+  .search-box{min-width:100%;}
+  .contact-grid{grid-template-columns:1fr;}
+  .contact-field:nth-child(odd){border-right:none;}
+  .page-title{font-size:19px;}
+  .agenda-item{flex-wrap:wrap;gap:8px;}
+  .form-grid{grid-template-columns:1fr;}
+  .modal{padding:18px;}
+  .modal h2{font-size:17px;}
+  .page{padding:16px 14px 80px;}
+}
+@media(max-width:768px){.main{padding-top:60px;padding-bottom:90px;}.page{padding-top:60px;padding-bottom:90px;}}
+#mobileHeader{display:flex;}@media(min-width:769px){#mobileHeader{display:none!important;}.main{padding-top:0;}}</style>
 </head>
 <body>
+
+<div id="mobileHeader" style="display:none;position:fixed;top:0;left:0;right:0;z-index:15;background:var(--dark);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);">
+  <span style="font-family:'DM Serif Display',serif;color:white;font-size:14px;">Stapelfinancieringen</span>
+  <div class="dot ok" id="dotMobile" style="width:8px;height:8px;"></div>
+</div>
 <aside class="sb">
   <div class="sb-logo">
     <span class="sb-badge">Intern systeem</span>
@@ -444,7 +483,7 @@ function saveLocalC(){try{localStorage.setItem("sf_c",JSON.stringify(clients));}
 function loadLocalC(){try{var r=localStorage.getItem("sf_c");return r?JSON.parse(r):[];}catch(e){return[];}}
 function saveLocalP(){try{localStorage.setItem("sf_p",JSON.stringify(prospects));}catch(e){}}
 function loadLocalP(){try{var r=localStorage.getItem("sf_p");return r?JSON.parse(r):[];}catch(e){return[];}}
-function setStat(s,t){document.getElementById("dot").className="dot "+s;document.getElementById("syncTxt").textContent=t;}
+function setStat(s,t){document.getElementById("dot").className="dot "+s;document.getElementById("syncTxt").textContent=t;var md=document.getElementById("dotMobile");if(md)md.className="dot "+s;}
 async function loadData(){
   setStat("syncing","Laden...");
   var ok=true;
